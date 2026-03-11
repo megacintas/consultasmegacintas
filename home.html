@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>MegaCintas - Produtos</title>
+
+<style>
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    min-height: 100vh;
+    background: black;
+}
+
+/* VÍDEO DE FUNDO */
+.video-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    filter: brightness(0.35);
+}
+
+/* OVERLAY ESCURO */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top, rgba(255,165,0,0.15), rgba(0,0,0,0.85));
+    z-index: -1;
+}
+
+/* HEADER */
+header {
+    padding: 25px;
+    text-align: center;
+}
+
+header img {
+    height: 90px;
+    filter: drop-shadow(0 0 15px orange);
+}
+
+/* TITULO */
+h1 {
+    text-align: center;
+    margin: 30px 0 10px;
+    font-size: 32px;
+    letter-spacing: 1px;
+}
+
+.subtitulo {
+    text-align: center;
+    color: #ccc;
+    margin-bottom: 40px;
+}
+
+/* GRID PREMIUM */
+.categorias {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+}
+
+/* CARD */
+.categoria {
+    position: relative;
+    padding: 35px 25px;
+    background: linear-gradient(180deg, #0b0b0b, #000);
+    border-radius: 18px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    box-shadow:
+        inset 0 0 0 1px rgba(255,165,0,0.25),
+        0 20px 40px rgba(0,0,0,0.6);
+    transition: 0.35s ease;
+    overflow: hidden;
+}
+
+/* EFEITO LUZ */
+.categoria::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top, rgba(255,165,0,0.25), transparent 60%);
+    opacity: 0;
+    transition: 0.35s;
+}
+
+.categoria:hover::before {
+    opacity: 1;
+}
+
+.categoria:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow:
+        0 25px 60px rgba(255,165,0,0.25),
+        inset 0 0 0 1px orange;
+}
+
+/* TEXTO CARD */
+.categoria span {
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.categoria small {
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* RESPONSIVO */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 24px;
+    }
+    header img {
+        height: 70px;
+    }
+}
+</style>
+</head>
+
+<body>
+<!-- ÁREA DE RELATÓRIO (BOTÃO FLUTUANTE PREMIUM) -->
+<section class="relatorio">
+    <a href="relatorio.html" class="btn-relatorio">
+        Relatório
+    </a>
+</section>
+
+<style>
+/* CONTAINER FIXO NO CANTO */
+.relatorio {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 9999;
+}
+
+/* BOTÃO PREMIUM DISCRETO */
+.btn-relatorio {
+    position: relative;
+    width: 58px;
+    height: 58px;
+    background: linear-gradient(180deg, #0b0b0b, #000);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: orange;
+    font-size: 11px;
+    font-weight: bold;
+    text-decoration: none;
+
+    box-shadow: 0 0 12px rgba(255,165,0,0.18);
+    overflow: hidden;
+
+    opacity: 0.45;
+    transition: all 0.4s ease;
+}
+
+/* EFEITO DE LUZ PREMIUM */
+.btn-relatorio::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top,
+        rgba(255,165,0,0.4),
+        transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* HOVER PREMIUM */
+.btn-relatorio:hover {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.1);
+    box-shadow:
+        0 25px 55px rgba(255,165,0,0.35),
+        inset 0 0 0 1px orange;
+}
+
+/* ATIVA A LUZ */
+.btn-relatorio:hover::before {
+    opacity: 1;
+}
+
+/* AJUSTE MOBILE */
+@media (max-width: 600px) {
+    .btn-relatorio {
+        width: 52px;
+        height: 52px;
+        font-size: 10px;
+    }
+}
+</style>
+
+<!-- VÍDEO FUNDO -->
+<video class="video-bg" autoplay muted loop playsinline>
+    <source src="videos/fundo.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<header>
+    <img src="imagens/logo.png" alt="Mega Cintas">
+</header>
+
+<h1>Selecione a categoria</h1>
+<p class="subtitulo">Produtos profissionais para elevação e amarração</p>
+
+<div class="categorias">
+    <a href="produtos-branca.html" class="categoria">
+        <span>Cintas Sling Branca</span>
+        <small>Alta resistência e segurança</small>
+    </a>
+
+    <a href="produtos-colorida.html" class="categoria">
+        <span>Cintas Sling Colorida</span>
+        <small>Identificação rápida por carga</small>
+    </a>
+
+    <a href="produtos-conjuntos.html" class="categoria">
+        <span>Conjuntos</span>
+        <small>Soluções completas</small>
+    </a>
+
+    <a href="#" class="categoria">
+        <span>Cabos de Aço</span>
+        <small>Durabilidade industrial</small>
+    </a>
+
+
+</div>
+
+</body>
+</html>

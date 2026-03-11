@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Login - MegaCintas</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top, #111, #000);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* CARD */
+.login-container {
+    width: 390px;
+    padding: 45px;
+    background: #0f0f0f;
+    border-radius: 22px;
+    box-shadow: 0 0 50px rgba(255,165,0,0.25);
+    text-align: center;
+}
+
+/* LOGO */
+.login-container img {
+    width: 110px;
+    margin-bottom: 30px;
+}
+
+/* INPUT GROUP */
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 14px 45px 14px 14px;
+    border-radius: 14px;
+    border: 1px solid #222;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+/* Remove olho automático navegador */
+input::-ms-reveal,
+input::-ms-clear {
+    display: none;
+}
+input[type="password"]::-webkit-credentials-auto-fill-button {
+    display: none !important;
+}
+
+.login-container input:focus {
+    outline: none;
+    border: 1px solid orange;
+    box-shadow: 0 0 12px rgba(255,165,0,0.4);
+}
+
+/* OLHO SVG */
+.toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+/* BOTÃO */
+.login-container button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, orange, #ff8800);
+    color: #000;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-container button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255,165,0,0.4);
+}
+
+
+.error {
+    margin-top: 15px;
+    color: #ff4d4d;
+    font-size: 14px;
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-container">
+    <img src="imagens/logo.png" alt="MegaCintas">
+
+    <div class="input-group">
+        <input type="text" id="login" placeholder="Login" autocomplete="off">
+    </div>
+
+    <div class="input-group">
+        <input type="password" id="senha" placeholder="Senha" autocomplete="new-password">
+
+      
+        <span class="toggle" onclick="toggleSenha()">
+            <svg id="iconEye" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12C3 7 7 4 12 4s9 3 11 8c-2 5-6 8-11 8S3 17 1 12z"/>
+                <circle cx="12" cy="12" r="3"/>
+                <line id="slash" x1="3" y1="3" x2="21" y2="21"/>
+            </svg>
+        </span>
+
+    </div>
+
+    <button onclick="validarLogin()">Entrar</button>
+    <div class="error" id="erro">Login ou senha incorretos</div>
+</div>
+
+<script>
+
+
+const _cred = [
+    "bWVnYWNpbnRhcw==",          
+    "bWVnYWNpbnRhczIyMTE="       
+];
+
+function dec(v){
+    return atob(v);
+}
+
+let tentativas = 0;
+
+function validarLogin(){
+
+    const login = document.getElementById("login").value.trim();
+    const senha = document.getElementById("senha").value.trim();
+
+    if(login === dec(_cred[0]) && senha === dec(_cred[1])){
+
+        sessionStorage.setItem("logado","true");
+        window.location.href = "home.html";
+
+    } else {
+
+        tentativas++;
+        document.getElementById("erro").style.display = "block";
+        document.getElementById("senha").value = "";
+
+        if(tentativas >= 3){
+            document.querySelector("button").disabled = true;
+            document.querySelector("button").innerText = "Bloqueado";
+        }
+    }
+}
+
+function toggleSenha(){
+    const campo = document.getElementById("senha");
+    const slash = document.getElementById("slash");
+
+    if(campo.type === "password"){
+        campo.type = "text";
+        slash.style.display = "none";
+    } else {
+        campo.type = "password";
+        slash.style.display = "block";
+    }
+}
+
+</script>
+
+</body>
+</html>
